@@ -9,7 +9,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
@@ -121,7 +120,7 @@ function RegimeCards({
         return (
           <article key={item.name} className="rounded-lg border bg-background p-3">
             <p className="text-xs text-muted-foreground">Regime</p>
-            <p className="line-clamp-2 text-sm font-medium">{item.name}</p>
+            <p className="text-sm font-medium break-words">{item.name}</p>
             <div className="mt-2 flex items-center justify-between">
               <p className="text-lg font-semibold">{item.total.toLocaleString("pt-BR")}</p>
               <p className="text-xs text-muted-foreground">{percentual.toFixed(1)}%</p>
@@ -330,14 +329,10 @@ export function EmpresasDashboard({
   ]
 
   return (
-    <SidebarProvider defaultOpen>
+    <SidebarProvider defaultOpen={false}>
       <Sidebar>
-        <SidebarHeader className="flex items-center gap-2">
-          <SidebarTrigger />
-          <div className="text-sm font-semibold">Insights</div>
-        </SidebarHeader>
         <SidebarContent>
-          <SidebarGroup>
+          <SidebarGroup className="pt-2">
             <SidebarGroupLabel>Navegação</SidebarGroupLabel>
             <SidebarMenuContent
               activeView={activeView}
@@ -348,12 +343,23 @@ export function EmpresasDashboard({
       </Sidebar>
       <SidebarInset className="bg-muted/20 p-4 md:p-6">
         <div className="mx-auto flex w-full max-w-[1500px] flex-col gap-4">
-          <section className="rounded-xl border bg-card p-4 shadow-sm">
-            <div className="flex flex-wrap items-center justify-between gap-3">
+          <section className="rounded-xl border bg-card p-4 shadow-sm md:p-5">
+            <div className="rounded-lg border bg-gradient-to-r from-primary/10 via-cyan-500/10 to-transparent p-3 md:p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h1 className="text-lg font-semibold md:text-xl">Dashboard Contábil</h1>
+                  <p className="text-sm text-muted-foreground">
+                    Visão por categoria com filtros independentes
+                  </p>
+                </div>
+                <SidebarTrigger className="shrink-0" />
+              </div>
+            </div>
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h1 className="text-lg font-semibold">Dashboard Contábil</h1>
-                <p className="text-sm text-muted-foreground">
-                  Layout com sidebar e análise por categoria
+                <p className="text-xs text-muted-foreground">Rota ativa</p>
+                <p className="text-sm font-medium">
+                  {menuItems.find((item) => item.key === activeView)?.label}
                 </p>
               </div>
             </div>

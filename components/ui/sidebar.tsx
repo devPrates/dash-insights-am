@@ -59,7 +59,7 @@ function Sidebar({
       data-open={open}
       className={cn(
         "border-r bg-card text-card-foreground transition-all duration-200",
-        open ? "w-64" : "w-[72px]",
+        open ? "w-56 md:w-64" : "w-14 md:w-[72px]",
         className
       )}
     >
@@ -79,7 +79,7 @@ function SidebarContent({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  return <div className={cn("p-2", className)} {...props} />
+  return <div className={cn("p-1.5 md:p-2", className)} {...props} />
 }
 
 function SidebarGroup({
@@ -121,7 +121,7 @@ function SidebarMenuButton({
   return (
     <button
       className={cn(
-        "flex h-9 w-full items-center rounded-md px-2 text-sm transition-colors",
+        "flex h-9 w-full items-center rounded-md px-1.5 text-sm transition-colors md:px-2",
         isActive ? "bg-primary text-primary-foreground" : "hover:bg-accent hover:text-accent-foreground",
         !open && "justify-center px-0",
         className

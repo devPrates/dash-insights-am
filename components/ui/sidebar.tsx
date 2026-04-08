@@ -93,6 +93,8 @@ function SidebarGroupLabel({
   className,
   ...props
 }: React.ComponentProps<"p">) {
+  const { open } = useSidebar()
+  if (!open) return null
   return <p className={cn("px-2 py-1 text-xs font-medium text-muted-foreground", className)} {...props} />
 }
 

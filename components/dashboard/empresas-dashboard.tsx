@@ -132,6 +132,32 @@ function RegimeCards({
   )
 }
 
+function CidadeCards({
+  data,
+  total,
+}: {
+  data: CountDatum[]
+  total: number
+}) {
+  return (
+    <div className="grid gap-2 md:grid-cols-2">
+      {data.map((item) => {
+        const percentual = total > 0 ? (item.total / total) * 100 : 0
+        return (
+          <article key={item.name} className="rounded-lg border bg-background p-3">
+            <p className="text-xs text-muted-foreground">Cidade</p>
+            <p className="text-sm font-medium break-words">{item.name}</p>
+            <div className="mt-2 flex items-center justify-between">
+              <p className="text-lg font-semibold">{item.total.toLocaleString("pt-BR")}</p>
+              <p className="text-xs text-muted-foreground">{percentual.toFixed(1)}%</p>
+            </div>
+          </article>
+        )
+      })}
+    </div>
+  )
+}
+
 function SidebarMenuContent({
   activeView,
   setActiveView,
@@ -492,19 +518,7 @@ export function EmpresasDashboard({
                 />
               </div>
               <h2 className="mb-3 text-sm font-medium">Cidade</h2>
-              <ChartContainer
-                config={barConfig}
-                className="min-h-[360px]"
-                style={{ height: Math.max(360, cidadeData.length * 32) }}
-              >
-                <BarChart data={cidadeData} layout="vertical" accessibilityLayer margin={{ left: 20, right: 8, top: 8, bottom: 8 }}>
-                  <CartesianGrid horizontal={false} />
-                  <XAxis type="number" allowDecimals={false} />
-                  <YAxis dataKey="name" type="category" width={180} tickLine={false} axisLine={false} />
-                  <ChartTooltip content={<ChartTooltipContent />} />
-                  <Bar dataKey="total" fill="var(--color-total)" radius={6} />
-                </BarChart>
-              </ChartContainer>
+              <CidadeCards data={cidadeData} total={cidadeChartRows.length} />
             </section>
           ) : null}
 
